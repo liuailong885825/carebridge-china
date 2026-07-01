@@ -1,0 +1,7 @@
+{
+    "buildCommand": null,
+    "outputDirectory": null,
+    "rewrites": [
+        { "source": "/api/send", "destination": "/api/send.py" }
+    ]
+}
