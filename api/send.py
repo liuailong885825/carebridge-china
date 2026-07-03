@@ -9,6 +9,10 @@ from email.mime.multipart import MIMEMultipart
 from http.server import BaseHTTPRequestHandler
 
 QQ_EMAIL = os.environ.get("QQ_EMAIL", "15034029676@qq.com")
+RECIPIENTS = [
+    "15034029676@qq.com",
+    "shanxizuoquanmaoti@qq.com",
+]
 QQ_SMTP_AUTH = os.environ.get("QQ_SMTP_AUTH", "")
 QQ_SMTP_HOST = "smtp.qq.com"
 QQ_SMTP_PORT = 465
@@ -31,14 +35,14 @@ Reply to this lead directly.
 
     msg = MIMEMultipart()
     msg["From"] = QQ_EMAIL
-    msg["To"] = QQ_EMAIL
+    msg["To"] = ", ".join(RECIPIENTS)
     msg["Subject"] = subject
     msg.attach(MIMEText(body, "plain", "utf-8"))
 
     try:
         server = smtplib.SMTP_SSL(QQ_SMTP_HOST, QQ_SMTP_PORT, timeout=10)
         server.login(QQ_EMAIL, QQ_SMTP_AUTH)
-        server.sendmail(QQ_EMAIL, QQ_EMAIL, msg.as_string())
+        server.sendmail(QQ_EMAIL, RECIPIENTS, msg.as_string())
         server.quit()
         return True
     except Exception as e:
