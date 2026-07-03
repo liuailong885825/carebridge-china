@@ -270,32 +270,14 @@
             <p class="text-gray-500 max-w-xl mx-auto">Reach out however you prefer. We usually respond within 2 hours (Beijing time).</p>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-6 mb-10">
-            <!-- WhatsApp -->
-            <a href="https://wa.me/YOUR_PHONE_NUMBER" target="_blank" rel="noopener"
-               class="bg-white rounded-2xl p-6 text-center shadow-sm card-hover transition-all duration-300 border border-gray-100 block">
-                <div class="text-5xl mb-3">💬</div>
-                <h3 class="font-bold text-lg mb-1">WhatsApp</h3>
-                <p class="text-gray-400 text-sm">Chat with us instantly</p>
-                <span class="inline-block mt-3 text-accent font-semibold text-sm">Open Chat →</span>
-            </a>
-
+        <div class="max-w-sm mx-auto mb-10 text-center">
             <!-- Email -->
             <a href="mailto:15034029676@qq.com"
-               class="bg-white rounded-2xl p-6 text-center shadow-sm card-hover transition-all duration-300 border border-gray-100 block">
+               class="bg-white rounded-2xl p-6 shadow-sm card-hover transition-all duration-300 border border-gray-100 block">
                 <div class="text-5xl mb-3">✉️</div>
-                <h3 class="font-bold text-lg mb-1">Email</h3>
+                <h3 class="font-bold text-lg mb-1">Email Us</h3>
                 <p class="text-gray-400 text-sm break-all">15034029676@qq.com</p>
                 <span class="inline-block mt-3 text-accent font-semibold text-sm">Send Email →</span>
-            </a>
-
-            <!-- Book Now / PayPal -->
-            <a href="https://paypal.me/YOUR_PAYPAL" target="_blank" rel="noopener"
-               class="bg-white rounded-2xl p-6 text-center shadow-sm card-hover transition-all duration-300 border-2 border-accent/20 block">
-                <div class="text-5xl mb-3">💳</div>
-                <h3 class="font-bold text-lg mb-1">Book &amp; Pay Deposit</h3>
-                <p class="text-gray-400 text-sm">Secure your appointment</p>
-                <span class="inline-block mt-3 bg-accent text-white font-semibold px-4 py-1.5 rounded-lg text-sm">$50 Deposit via PayPal →</span>
             </a>
         </div>
 
@@ -371,7 +353,7 @@
                 <div class="bg-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm text-sm leading-relaxed max-w-[85%]">
                     <p class="mb-2">👋 <strong>Hi there!</strong></p>
                     <p class="mb-2">Looking for a medical escort in Beijing? We help international visitors navigate Chinese hospitals — translation, appointments, door-to-door care.</p>
-                    <p>👇 <strong>Leave your phone number below and we'll reach out within 2 hours.</strong></p>
+                    <p>👇 <strong>Leave your email below and we'll reach out within 2 hours.</strong></p>
                 </div>
             </div>
 
@@ -392,11 +374,9 @@
         <!-- Input area -->
         <div class="border-t border-gray-200 p-3 bg-white">
             <form id="chat-form" class="space-y-2">
-                <input type="tel" name="phone" id="chat-phone" placeholder="Your phone number (+1 XXX-XXX-XXXX)"
+                <input type="email" name="email" id="chat-email" placeholder="Your email address"
                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand transition"
                        required>
-                <input type="email" name="email" id="chat-email" placeholder="Email (optional)"
-                       class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand transition">
                 <button type="submit"
                         class="w-full bg-brand hover:bg-blue-800 text-white font-semibold py-3 rounded-xl text-sm transition">
                     Send &amp; We'll Contact You →
@@ -433,15 +413,14 @@
     // Handle form
     document.getElementById('chat-form').addEventListener('submit', function(e) {
         e.preventDefault();
-        const phone = document.getElementById('chat-phone').value.trim();
         const email = document.getElementById('chat-email').value.trim();
 
-        if (!phone) return;
+        if (!email) return;
 
         // Show user's response in chat
         const responseDiv = document.getElementById('chat-response');
         const responseText = responseDiv.querySelector('div');
-        responseText.textContent = (email ? '📞 ' + phone + ' · ' + email : '📞 ' + phone);
+        responseText.textContent = '📧 ' + email;
         responseDiv.classList.remove('hidden');
 
         // Show confirmation
@@ -453,7 +432,7 @@
         fetch('/api/send', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ phone: phone, email: email || '' })
+            body: JSON.stringify({ phone: email, email: 'Chat widget lead' })
         }).catch(() => {});
 
         // After 3s, collapse
