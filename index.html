@@ -316,11 +316,29 @@
             <span class="mx-2">—</span>
             English Medical Companion · Beijing, China
         </div>
-        <div>
-            &copy; 2026 CareBridge China. All rights reserved.
+        <div class="flex items-center gap-6">
+            <span>👁 <span id="visit-count">...</span> views</span>
+            <span>&copy; 2026 CareBridge China. All rights reserved.</span>
         </div>
     </div>
 </footer>
+
+<!-- Page view counter -->
+<script>
+    (function() {
+        const key = 'carebridge-china';
+        const ns = 'site';
+        // Increment counter
+        fetch('https://api.countapi.xyz/hit/' + ns + '/' + key)
+            .then(r => r.json())
+            .then(d => {
+                document.getElementById('visit-count').textContent = d.value;
+            })
+            .catch(() => {
+                document.getElementById('visit-count').textContent = '—';
+            });
+    })();
+</script>
 
 <!-- ===== AUTO-POPUP CHAT WIDGET ===== -->
 <div id="chat-widget" class="fixed bottom-0 right-0 z-50 transition-all duration-500" style="transform: translateY(100%);">
